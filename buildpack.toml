@@ -22,17 +22,29 @@ version = "{{.Version}}"
 [[stacks]]
 id = "io.buildpacks.stacks.bionic"
 
-# [[metadata.dependencies]]
-# id      = ""
-# name    = ""
-# version = ""
-# uri     = ""
-# sha256  = ""
-# stacks  = [ "io.buildpacks.stacks.bionic" ]
+[[metadata.dependencies]]
+id      = "azure-application-insights-java"
+name    = "Azure Application Insights Java Agent"
+version = "2.5.0"
+uri     = "https://github.com/Microsoft/ApplicationInsights-Java/releases/download/2.5.1/applicationinsights-agent-2.5.1.jar"
+sha256  = "placeholder"
+stacks  = [ "io.buildpacks.stacks.bionic" ]
 
-#   [[metadata.dependencies.licenses]]
-#   type = "<TYPE>"
-#   uri  = "<URI>"
+  [[metadata.dependencies.licenses]]
+  type = "MIT"
+  uri  = "https://github.com/Microsoft/ApplicationInsights-Java/blob/master/LICENSE.txt"
+
+[[metadata.dependencies]]
+id      = "azure-application-insights-nodejs"
+name    = "Azure Application Insights NodeJS Agent"
+version = "1.7.3"
+uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-1.7.3.tgz"
+sha256  = "placeholder"
+stacks  = [ "io.buildpacks.stacks.bionic" ]
+
+  [[metadata.dependencies.licenses]]
+  type = "MIT"
+  uri  = "https://github.com/microsoft/ApplicationInsights-node.js/blob/develop/LICENSE"
 
 [metadata]
 pre-package   = "scripts/build.sh"
@@ -40,7 +52,9 @@ include-files = [
   "LICENSE",
   "NOTICE",
   "README.md",
+  "bin/azure-application-insights-properties",
   "bin/build",
   "bin/detect",
   "buildpack.toml",
+  "resources/AI-Agent.xml"
 ]

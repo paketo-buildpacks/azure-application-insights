@@ -14,16 +14,36 @@
  * limitations under the License.
  */
 
-package main
+package properties
 
 import (
-	"os"
+	"fmt"
+	"sort"
+	"strings"
 
-	"github.com/paketo-buildpacks/azure-application-insights/insights"
+	"github.com/buildpacks/libcnb"
 	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
 )
 
-func main() {
-	libpak.Build(insights.Build{Logger: bard.NewLogger(os.Stdout)})
+type Properties struct {
+	Bindings libcnb.Bindings
+}
+
+func (p Properties) Execute() ([]string, error) {
+	br := libpak.BindingResolver{Bindings: p.Bindings}
+
+	b, ok, err := br.Resolve("ApplicationInsights", "")
+	if err != nil {
+		return nil, fmt.Errorf("unable to resolve binding ApplicationInsights\n%w", err)
+	} else if !ok {
+		return nil, nil
+	}
+
+	var vars []string
+	for k, v := range b.Secret {
+		vars = append(vars, fmt.Sprintf(`export APPINSIGHTS_%s="%s"`, strings.ToUpper(k), v))
+	}
+
+	sort.Strings(vars)
+	return vars, nil
 }

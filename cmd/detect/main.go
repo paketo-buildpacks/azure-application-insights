@@ -16,5 +16,11 @@
 
 package main
 
+import (
+	"github.com/paketo-buildpacks/azure-application-insights/insights"
+	"github.com/paketo-buildpacks/libpak"
+)
+
 func main() {
+	libpak.Detect(insights.Detect{})
 }

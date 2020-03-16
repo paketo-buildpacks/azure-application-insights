@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package main
+package properties_test
 
 import (
-	"os"
+	"testing"
 
-	"github.com/paketo-buildpacks/azure-application-insights/insights"
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/sclevine/spec"
+	"github.com/sclevine/spec/report"
 )
 
-func main() {
-	libpak.Build(insights.Build{Logger: bard.NewLogger(os.Stdout)})
+func TestUnit(t *testing.T) {
+	suite := spec.New("properties", spec.Report(report.Terminal{}))
+	suite("Properties", testProperties)
+	suite.Run(t)
 }

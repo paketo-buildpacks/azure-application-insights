@@ -17,13 +17,32 @@
 package main
 
 import (
-	"os"
+	"fmt"
+	"strings"
 
-	"github.com/paketo-buildpacks/azure-application-insights/insights"
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/buildpacks/libcnb"
+	"github.com/paketo-buildpacks/azure-application-insights/properties"
+	"github.com/paketo-buildpacks/libpak/sherpa"
 )
 
 func main() {
-	libpak.Build(insights.Build{Logger: bard.NewLogger(os.Stdout)})
+	sherpa.Execute(func() error {
+		var (
+			err error
+			p properties.Properties
+		)
+
+		p.Bindings, err = libcnb.NewBindingsFromEnvironment()
+		if err != nil {
+			return fmt.Errorf("unable to read bindings from environment\n%w", err)
+		}
+
+		e, err := p.Execute()
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(strings.Join(e, "\n"))
+		return nil
+	})
 }
