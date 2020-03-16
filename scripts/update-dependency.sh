@@ -1,5 +1,5 @@
 uri() {
-  if [[ "${DEPENDENCY}" == "jdk" || "${DEPENDENCY}" == "jre" ]]; then
+  if [[ "${DEPENDENCY}" == "azure-application-insights-java" ]]; then
     echo "https://github.com/Microsoft/ApplicationInsights-Java/releases/download/$(cat "${ROOT}"/dependency/version)/$(basename "${ROOT}"/dependency/applicationinsights-agent-*.jar)"
   else
     cat "${ROOT}"/dependency/uri
