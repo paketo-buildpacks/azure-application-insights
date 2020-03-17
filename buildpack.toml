@@ -39,7 +39,7 @@ id      = "azure-application-insights-nodejs"
 name    = "Azure Application Insights NodeJS Agent"
 version = "1.7.3"
 uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-1.7.3.tgz"
-sha256  = "placeholder"
+sha256  = "2377a506e1d29669e9108dbf90256e77a25b5a8590b6465a73520f8c4c30328c"
 stacks  = [ "io.buildpacks.stacks.bionic" ]
 
   [[metadata.dependencies.licenses]]
