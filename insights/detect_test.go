@@ -17,7 +17,6 @@
 package insights_test
 
 import (
-	"io/ioutil"
 	"testing"
 
 	"github.com/buildpacks/libcnb"
@@ -32,16 +31,7 @@ func testDetect(t *testing.T, context spec.G, it spec.S) {
 
 		ctx    libcnb.DetectContext
 		detect insights.Detect
-		path   string
 	)
-
-	it.Before(func() {
-		var err error
-		path, err = ioutil.TempDir("", "procfile")
-		Expect(err).NotTo(HaveOccurred())
-
-		ctx.Application.Path = path
-	})
 
 	it("fails without service", func() {
 		Expect(detect.Detect(ctx)).To(Equal(libcnb.DetectResult{}))
@@ -49,7 +39,7 @@ func testDetect(t *testing.T, context spec.G, it spec.S) {
 
 	it("passes with service", func() {
 		ctx.Platform.Bindings = libcnb.Bindings{
-			"test-service": libcnb.Binding{Metadata: map[string]string{libcnb.BindingKind: "ApplicationInsights"}},
+			{Name: "test-service", Metadata: map[string]string{libcnb.BindingKind: "ApplicationInsights"}},
 		}
 
 		Expect(detect.Detect(ctx)).To(Equal(libcnb.DetectResult{
