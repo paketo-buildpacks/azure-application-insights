@@ -40,10 +40,10 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 
 		ctx.Buildpack.Info.ID = "test-id"
 
-		ctx.Buildpack.Path, err = ioutil.TempDir("", "java-agent-buildpack")
+		ctx.Buildpack.Path, err = ioutil.TempDir("", "properties-buildpack")
 		Expect(err).NotTo(HaveOccurred())
 
-		ctx.Layers.Path, err = ioutil.TempDir("", "java-agent-layers")
+		ctx.Layers.Path, err = ioutil.TempDir("", "properties-layers")
 		Expect(err).NotTo(HaveOccurred())
 	})
 
