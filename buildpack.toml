@@ -56,5 +56,5 @@ include-files = [
   "bin/build",
   "bin/detect",
   "buildpack.toml",
-  "resources/AI-Agent.xml"
+  "resources/AI-Agent.xml",
 ]
