@@ -25,9 +25,9 @@ id = "io.buildpacks.stacks.bionic"
 [[metadata.dependencies]]
 id      = "azure-application-insights-java"
 name    = "Azure Application Insights Java Agent"
-version = "2.5.1"
-uri     = "https://github.com/Microsoft/ApplicationInsights-Java/releases/download/2.5.1/applicationinsights-agent-2.5.1.jar"
-sha256  = "99ca01feae26109cf270b0f576891c5a01fc6a755311ead2f159f58724ca657d"
+version = "2.6.0"
+uri     = "https://github.com/Microsoft/ApplicationInsights-Java/releases/download/2.6.0/applicationinsights-agent-2.6.0.jar"
+sha256  = "3149609d0517e8f85999d0876b4d017853556c2e4a4e6d33dc9304407c934db3"
 stacks  = [ "io.buildpacks.stacks.bionic" ]
 
   [[metadata.dependencies.licenses]]
