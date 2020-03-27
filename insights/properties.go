@@ -22,6 +22,7 @@ import (
 	"path/filepath"
 
 	"github.com/buildpacks/libcnb"
+	_ "github.com/paketo-buildpacks/azure-application-insights/insights/statik"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
 	"github.com/paketo-buildpacks/libpak/sherpa"
@@ -39,21 +40,25 @@ func NewProperties(buildpack libcnb.Buildpack, plan *libcnb.BuildpackPlan) Prope
 	}
 }
 
+//go:generate statik -src . -include *.sh
+
 func (p Properties) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	p.LayerContributor.Logger = p.Logger
 
 	return p.LayerContributor.Contribute(layer, func(artifact *os.File) (libcnb.Layer, error) {
-		p.Logger.Body("Copying to %s", layer.Path)
+		p.Logger.Bodyf("Copying to %s", layer.Path)
 
 		file := filepath.Join(layer.Path, "bin", "azure-application-insights-properties")
 		if err := sherpa.CopyFile(artifact, file); err != nil {
 			return libcnb.Layer{}, fmt.Errorf("unable to copy %s to %s\n%w", artifact.Name(), file, err)
 		}
 
-		layer.Profile.Add("properties", `printf "Configuring Azure Application Insights properties\n"
+		s, err := sherpa.StaticFile("/properties.sh")
+		if err != nil {
+			return libcnb.Layer{}, fmt.Errorf("unable to load properties.sh\n%w", err)
+		}
 
-eval $(azure-application-insights-properties)
-`)
+		layer.Profile.Add("properties.sh", s)
 
 		layer.Launch = true
 		return layer, nil

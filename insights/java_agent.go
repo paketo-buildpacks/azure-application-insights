@@ -44,13 +44,13 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	j.LayerContributor.Logger = j.Logger
 
 	return j.LayerContributor.Contribute(layer, func(artifact *os.File) (libcnb.Layer, error) {
-		j.Logger.Body("Copying to %s", layer.Path)
+		j.Logger.Bodyf("Copying to %s", layer.Path)
 
 		file := filepath.Join(layer.Path, filepath.Base(artifact.Name()))
 		if err := sherpa.CopyFile(artifact, file); err != nil {
 			return libcnb.Layer{}, fmt.Errorf("unable to copy %s to %s\n%w", artifact.Name(), file, err)
 		}
-		layer.LaunchEnvironment.Append("JAVA_OPTS", " -javaagent:%s", file)
+		layer.LaunchEnvironment.Appendf("JAVA_OPTS", " -javaagent:%s", file)
 
 		file = filepath.Join(j.BuildpackPath, "resources", "AI-Agent.xml")
 		in, err := os.Open(file)

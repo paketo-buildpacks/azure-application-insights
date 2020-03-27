@@ -49,7 +49,7 @@ func (n NodeJSAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	n.LayerContributor.Logger = n.Logger
 
 	layer, err := n.LayerContributor.Contribute(layer, func(artifact *os.File) (libcnb.Layer, error) {
-		n.Logger.Body("Installing to %s", layer.Path)
+		n.Logger.Bodyf("Installing to %s", layer.Path)
 
 		if err := n.Executor.Execute(effect.Execution{
 			Command: "npm",

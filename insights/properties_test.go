@@ -61,8 +61,9 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 
 		Expect(layer.Launch).To(BeTrue())
 		Expect(filepath.Join(layer.Path, "bin", "azure-application-insights-properties")).To(BeARegularFile())
-		Expect(layer.Profile["properties"]).To(Equal(`printf "Configuring Azure Application Insights properties\n"
+		Expect(layer.Profile["properties.sh"]).To(Equal(`printf "Configuring Azure Application Insights properties\n"
 
+# shellcheck disable=SC2046
 eval $(azure-application-insights-properties)
 `))
 	})
