@@ -33,7 +33,9 @@ type JavaAgent struct {
 	Logger           bard.Logger
 }
 
-func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache, plan *libcnb.BuildpackPlan) JavaAgent {
+func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache,
+	plan *libcnb.BuildpackPlan) JavaAgent {
+
 	return JavaAgent{
 		BuildpackPath:    buildpackPath,
 		LayerContributor: libpak.NewDependencyLayerContributor(dependency, cache, plan),

@@ -113,7 +113,7 @@ func testNodeJSAgent(t *testing.T, context spec.G, it spec.S) {
 			[]byte("require('applicationinsights').start();\ntest")))
 	})
 
-	it("does not require application insights module", func() {
+	it("does not require applicationinsights module", func() {
 		Expect(ioutil.WriteFile(filepath.Join(ctx.Application.Path, "package.json"), []byte(`{ "main": "main.js" }`),
 			0644)).To(Succeed())
 		Expect(ioutil.WriteFile(filepath.Join(ctx.Application.Path, "main.js"),

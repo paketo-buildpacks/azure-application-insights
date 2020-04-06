@@ -37,7 +37,9 @@ type NodeJSAgent struct {
 	Logger           bard.Logger
 }
 
-func NewNodeJSAgent(applicationPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache, plan *libcnb.BuildpackPlan) NodeJSAgent {
+func NewNodeJSAgent(applicationPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache,
+	plan *libcnb.BuildpackPlan) NodeJSAgent {
+
 	return NodeJSAgent{
 		ApplicationPath:  applicationPath,
 		Executor:         effect.NewExecutor(),
