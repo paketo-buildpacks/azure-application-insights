@@ -41,7 +41,11 @@ func (p Properties) Execute() ([]string, error) {
 
 	var vars []string
 	for k, v := range b.Secret {
-		vars = append(vars, fmt.Sprintf(`export APPINSIGHTS_%s="%s"`, strings.ToUpper(k), v))
+		s := strings.ToUpper(k)
+		s = strings.ReplaceAll(s, "-", "_")
+		s = strings.ReplaceAll(s, ".", "_")
+
+		vars = append(vars, fmt.Sprintf(`export APPINSIGHTS_%s="%s"`, s, v))
 	}
 
 	sort.Strings(vars)
