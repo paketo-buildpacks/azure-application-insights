@@ -2,7 +2,7 @@
 The Paketo Azure Application Insights Buildpack is a Cloud Native Buildpack that contributes the Application Insights Agent and configures it to connect to the service.
 
 ## Behavior
-This buildpack will participate if all of the following conditions are met
+This buildpack will participate if all the following conditions are met
 
 * A binding exists with `kind` of `ApplicationInsights`
 
