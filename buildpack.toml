@@ -22,13 +22,16 @@ version = "{{.version}}"
 [[stacks]]
 id = "io.buildpacks.stacks.bionic"
 
+[[stacks]]
+id = "org.cloudfoundry.stacks.cflinuxfs3"
+
 [[metadata.dependencies]]
 id      = "azure-application-insights-java"
 name    = "Azure Application Insights Java Agent"
 version = "2.6.0"
 uri     = "https://github.com/Microsoft/ApplicationInsights-Java/releases/download/2.6.0/applicationinsights-agent-2.6.0.jar"
 sha256  = "3149609d0517e8f85999d0876b4d017853556c2e4a4e6d33dc9304407c934db3"
-stacks  = [ "io.buildpacks.stacks.bionic" ]
+stacks  = [ "io.buildpacks.stacks.bionic", "org.cloudfoundry.stacks.cflinuxfs3" ]
 
   [[metadata.dependencies.licenses]]
   type = "MIT"
@@ -40,7 +43,7 @@ name    = "Azure Application Insights NodeJS Agent"
 version = "1.7.4"
 uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-1.7.4.tgz"
 sha256  = "1bc280d31a0ff72bb4a908cecc76e41b3b62a897a53d3b3071bd3ce72ed3dc41"
-stacks  = [ "io.buildpacks.stacks.bionic" ]
+stacks  = [ "io.buildpacks.stacks.bionic", "org.cloudfoundry.stacks.cflinuxfs3" ]
 
   [[metadata.dependencies.licenses]]
   type = "MIT"
