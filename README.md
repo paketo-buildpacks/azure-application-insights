@@ -1,4 +1,4 @@
-# `paketo-buildpacks/azure-application-insights`
+# `gcr.io/paketo-buildpacks/azure-application-insights`
 The Paketo Azure Application Insights Buildpack is a Cloud Native Buildpack that contributes the Application Insights Agent and configures it to connect to the service.
 
 ## Behavior
