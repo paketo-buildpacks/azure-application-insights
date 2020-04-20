@@ -50,7 +50,7 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
 		}
 
-		ja := NewJavaAgent(context.Buildpack.Path, dep, dc, &context.Plan)
+		ja := NewJavaAgent(context.Buildpack.Path, dep, dc, &result.Plan)
 		ja.Logger = b.Logger
 		result.Layers = append(result.Layers, ja)
 	}
@@ -63,12 +63,12 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
 		}
 
-		na := NewNodeJSAgent(context.Application.Path, dep, dc, &context.Plan)
+		na := NewNodeJSAgent(context.Application.Path, dep, dc, &result.Plan)
 		na.Logger = b.Logger
 		result.Layers = append(result.Layers, na)
 	}
 
-	p := NewProperties(context.Buildpack, &context.Plan)
+	p := NewProperties(context.Buildpack, &result.Plan)
 	p.Logger = b.Logger
 	result.Layers = append(result.Layers, p)
 
