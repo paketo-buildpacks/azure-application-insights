@@ -59,6 +59,7 @@ include-files = [
   "bin/azure-application-insights-properties",
   "bin/build",
   "bin/detect",
+  "bin/main",
   "buildpack.toml",
   "resources/AI-Agent.xml",
 ]
