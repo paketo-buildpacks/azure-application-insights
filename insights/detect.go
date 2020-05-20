@@ -52,8 +52,7 @@ func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error
 				},
 				Requires: []libcnb.BuildPlanRequire{
 					{Name: "azure-application-insights-nodejs"},
-					{Name: "npm", Metadata: map[string]interface{}{"build": true}},
-					{Name: "node"},
+					{Name: "node", Metadata: map[string]interface{}{"build": true}},
 				},
 			},
 		},
