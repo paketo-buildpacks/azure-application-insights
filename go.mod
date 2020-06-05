@@ -9,5 +9,4 @@ require (
 	github.com/rakyll/statik v0.1.7
 	github.com/sclevine/spec v1.4.0
 	github.com/stretchr/testify v1.6.1
-	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
 )
