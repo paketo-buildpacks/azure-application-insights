@@ -69,7 +69,7 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 		Expect(layer.Profile["properties.sh"]).To(Equal(`printf "Configuring Azure Application Insights properties\n"
 
 # shellcheck disable=SC2046
-eval $(azure-application-insights-properties)
+eval $(azure-application-insights-properties) || exit $?
 `))
 	})
 }
