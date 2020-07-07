@@ -21,8 +21,9 @@ import (
 	"strings"
 
 	"github.com/buildpacks/libcnb"
-	"github.com/paketo-buildpacks/azure-application-insights/properties"
 	"github.com/paketo-buildpacks/libpak/sherpa"
+
+	"github.com/paketo-buildpacks/azure-application-insights/properties"
 )
 
 func main() {

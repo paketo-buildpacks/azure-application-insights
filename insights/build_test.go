@@ -21,8 +21,9 @@ import (
 
 	"github.com/buildpacks/libcnb"
 	. "github.com/onsi/gomega"
-	"github.com/paketo-buildpacks/azure-application-insights/insights"
 	"github.com/sclevine/spec"
+
+	"github.com/paketo-buildpacks/azure-application-insights/insights"
 )
 
 func testBuild(t *testing.T, context spec.G, it spec.S) {

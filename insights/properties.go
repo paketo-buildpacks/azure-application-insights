@@ -22,10 +22,11 @@ import (
 	"path/filepath"
 
 	"github.com/buildpacks/libcnb"
-	_ "github.com/paketo-buildpacks/azure-application-insights/insights/statik"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
 	"github.com/paketo-buildpacks/libpak/sherpa"
+
+	_ "github.com/paketo-buildpacks/azure-application-insights/insights/statik"
 )
 
 type Properties struct {
