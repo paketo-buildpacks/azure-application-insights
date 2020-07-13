@@ -36,7 +36,7 @@ stacks  = [ "io.buildpacks.stacks.bionic", "org.cloudfoundry.stacks.cflinuxfs3" 
 
   [[metadata.dependencies.licenses]]
   type = "MIT"
-  uri  = "https://github.com/Microsoft/ApplicationInsights-Java/blob/master/LICENSE.txt"
+  uri  = "https://github.com/Microsoft/ApplicationInsights-Java/blob/main/LICENSE.txt"
 
 [[metadata.dependencies]]
 id      = "azure-application-insights-nodejs"
