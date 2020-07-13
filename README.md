@@ -4,7 +4,7 @@ The Paketo Azure Application Insights Buildpack is a Cloud Native Buildpack that
 ## Behavior
 This buildpack will participate if all the following conditions are met
 
-* A binding exists with `kind` of `ApplicationInsights`
+* A binding exists with `type` of `ApplicationInsights`
 
 The buildpack will do the following for Java applications:
 

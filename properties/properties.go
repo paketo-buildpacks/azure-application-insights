@@ -32,7 +32,7 @@ type Properties struct {
 func (p Properties) Execute() ([]string, error) {
 	br := libpak.BindingResolver{Bindings: p.Bindings}
 
-	b, ok, err := br.Resolve("ApplicationInsights", "")
+	b, ok, err := br.Resolve("ApplicationInsights")
 	if err != nil {
 		return nil, fmt.Errorf("unable to resolve binding ApplicationInsights\n%w", err)
 	} else if !ok {

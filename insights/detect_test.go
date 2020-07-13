@@ -40,7 +40,7 @@ func testDetect(t *testing.T, context spec.G, it spec.S) {
 
 	it("passes with service", func() {
 		ctx.Platform.Bindings = libcnb.Bindings{
-			{Name: "test-service", Metadata: map[string]string{libcnb.BindingKind: "ApplicationInsights"}},
+			{Name: "test-service", Type: "ApplicationInsights"},
 		}
 
 		Expect(detect.Detect(ctx)).To(Equal(libcnb.DetectResult{

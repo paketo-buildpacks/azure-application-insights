@@ -40,9 +40,9 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 	it("contributes properties if binding exists", func() {
 		p.Bindings = libcnb.Bindings{
 			{
-				Name:     "test-binding",
-				Metadata: map[string]string{"kind": "ApplicationInsights"},
-				Secret:   map[string]string{"InstrumentationKey": "test-value"},
+				Name:   "test-binding",
+				Type:   "ApplicationInsights",
+				Secret: map[string]string{"InstrumentationKey": "test-value"},
 			},
 		}
 

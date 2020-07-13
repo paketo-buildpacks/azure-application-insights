@@ -28,7 +28,7 @@ type Detect struct{}
 func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error) {
 	br := libpak.BindingResolver{Bindings: context.Platform.Bindings}
 
-	if _, ok, err := br.Resolve("ApplicationInsights", ""); err != nil {
+	if _, ok, err := br.Resolve("ApplicationInsights"); err != nil {
 		return libcnb.DetectResult{}, fmt.Errorf("unable to resolve binding ApplicationInsights\n%w", err)
 	} else if !ok {
 		return libcnb.DetectResult{Pass: false}, nil
