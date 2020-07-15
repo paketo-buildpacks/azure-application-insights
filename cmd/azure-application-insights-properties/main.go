@@ -30,7 +30,7 @@ func main() {
 	sherpa.Execute(func() error {
 		var (
 			err error
-			p properties.Properties
+			p   properties.Properties
 		)
 
 		p.Bindings, err = libcnb.NewBindingsFromEnvironment()
