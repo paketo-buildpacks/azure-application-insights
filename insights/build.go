@@ -39,7 +39,10 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 		return libcnb.BuildResult{}, fmt.Errorf("unable to create dependency resolver\n%w", err)
 	}
 
-	dc := libpak.NewDependencyCache(context.Buildpack)
+	dc, err := libpak.NewDependencyCache(context)
+	if err != nil {
+		return libcnb.BuildResult{}, fmt.Errorf("unable to create dependency cache\n%w", err)
+	}
 	dc.Logger = b.Logger
 
 	if _, ok, err := pr.Resolve("azure-application-insights-java"); err != nil {

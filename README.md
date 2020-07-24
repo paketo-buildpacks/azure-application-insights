@@ -20,4 +20,12 @@ The buildpack will do the following NodeJS applications:
 ## License
 This buildpack is released under version 2.0 of the [Apache License][a].
 
+## Bindings
+The buildpack optionally accepts the following bindings:
+
+### Type: `dependency-mapping`
+|Key                   | Value   | Description
+|----------------------|---------|------------
+|`<dependency-digest>` | `<uri>` | If needed, the buildpack will fetch the dependency with digest `<dependency-digest>` from `<uri>`
+
 [a]: http://www.apache.org/licenses/LICENSE-2.0
