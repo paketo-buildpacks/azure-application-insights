@@ -71,6 +71,6 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	})
 }
 
-func (JavaAgent) Name() string {
-	return "java"
+func (j JavaAgent) Name() string {
+	return j.LayerContributor.LayerName()
 }

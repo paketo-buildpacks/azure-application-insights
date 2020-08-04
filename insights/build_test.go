@@ -50,8 +50,8 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(result.Layers).To(HaveLen(2))
-		Expect(result.Layers[0].Name()).To(Equal("java"))
-		Expect(result.Layers[1].Name()).To(Equal("properties"))
+		Expect(result.Layers[0].Name()).To(Equal("azure-application-insights-java"))
+		Expect(result.Layers[1].Name()).To(Equal("azure-application-insights-properties"))
 	})
 
 	it("contributes NodeJS agent", func() {
@@ -71,7 +71,7 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(result.Layers).To(HaveLen(2))
-		Expect(result.Layers[0].Name()).To(Equal("nodejs"))
-		Expect(result.Layers[1].Name()).To(Equal("properties"))
+		Expect(result.Layers[0].Name()).To(Equal("azure-application-insights-nodejs"))
+		Expect(result.Layers[1].Name()).To(Equal("azure-application-insights-properties"))
 	})
 }

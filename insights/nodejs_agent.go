@@ -94,6 +94,6 @@ func (n NodeJSAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	return layer, nil
 }
 
-func (NodeJSAgent) Name() string {
-	return "nodejs"
+func (n NodeJSAgent) Name() string {
+	return n.LayerContributor.LayerName()
 }
