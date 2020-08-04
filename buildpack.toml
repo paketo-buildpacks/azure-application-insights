@@ -41,9 +41,9 @@ stacks  = [ "io.buildpacks.stacks.bionic", "org.cloudfoundry.stacks.cflinuxfs3" 
 [[metadata.dependencies]]
 id      = "azure-application-insights-nodejs"
 name    = "Azure Application Insights NodeJS Agent"
-version = "1.8.3"
-uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-1.8.3.tgz"
-sha256  = "369d593372b60dcb248cd5a06997ec7620f2b6371a478c9cae46db430b615be8"
+version = "1.8.4"
+uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-1.8.4.tgz"
+sha256  = "a2c83ad3d2836a9f5aa9b379290b0dae20517114cf6158d898d158f852ba39dd"
 stacks  = [ "io.buildpacks.stacks.bionic", "org.cloudfoundry.stacks.cflinuxfs3" ]
 
   [[metadata.dependencies.licenses]]
