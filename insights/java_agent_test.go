@@ -74,7 +74,7 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 		Expect(layer.Launch).To(BeTrue())
 		Expect(filepath.Join(layer.Path, "stub-azure-application-insights-agent.jar")).To(BeARegularFile())
 		Expect(filepath.Join(layer.Path, "AI-Agent.xml")).To(BeARegularFile())
-		Expect(layer.LaunchEnvironment["JAVA_OPTS.append"]).To(Equal(fmt.Sprintf(" -javaagent:%s",
+		Expect(layer.LaunchEnvironment["JAVA_TOOL_OPTIONS.append"]).To(Equal(fmt.Sprintf(" -javaagent:%s",
 			filepath.Join(layer.Path, "stub-azure-application-insights-agent.jar"))))
 	})
 }

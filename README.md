@@ -8,7 +8,7 @@ This buildpack will participate if all the following conditions are met
 
 The buildpack will do the following for Java applications:
 
-* Contributes a Java agent to a layer and configures `$JAVA_OPTS` to use it
+* Contributes a Java agent to a layer and configures `JAVA_TOOL_OPTIONS` to use it
 * Transforms the contents of the binding secret to environment variables with the pattern `APPINSIGHTS_<KEY>=<VALUE>`
 
 The buildpack will do the following NodeJS applications:
