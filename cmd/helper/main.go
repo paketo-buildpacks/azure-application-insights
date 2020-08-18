@@ -18,12 +18,11 @@ package main
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/buildpacks/libcnb"
-	"github.com/paketo-buildpacks/libpak/sherpa"
 
 	"github.com/paketo-buildpacks/azure-application-insights/properties"
+	"github.com/paketo-buildpacks/libpak/sherpa"
 )
 
 func main() {
@@ -38,12 +37,8 @@ func main() {
 			return fmt.Errorf("unable to read bindings from environment\n%w", err)
 		}
 
-		e, err := p.Execute()
-		if err != nil {
-			return err
-		}
-
-		fmt.Println(strings.Join(e, "\n"))
-		return nil
+		return sherpa.Helpers(map[string]sherpa.ExecD{
+			"properties": p,
+		})
 	})
 }

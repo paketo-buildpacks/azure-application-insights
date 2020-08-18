@@ -46,6 +46,6 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 			},
 		}
 
-		Expect(p.Execute()).To(Equal([]string{`export APPINSIGHTS_INSTRUMENTATIONKEY="test-value"`}))
+		Expect(p.Execute()).To(Equal(map[string]string{"APPINSIGHTS_INSTRUMENTATIONKEY": "test-value"}))
 	})
 }

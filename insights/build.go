@@ -71,9 +71,9 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 		result.Layers = append(result.Layers, na)
 	}
 
-	p := NewProperties(context.Buildpack, result.Plan)
-	p.Logger = b.Logger
-	result.Layers = append(result.Layers, p)
+	h := libpak.NewHelperLayerContributor(context.Buildpack, result.Plan, "properties")
+	h.Logger = b.Logger
+	result.Layers = append(result.Layers, h)
 
 	return result, nil
 }
