@@ -18,10 +18,10 @@ package properties
 
 import (
 	"fmt"
-	"sort"
 	"strings"
 
 	"github.com/buildpacks/libcnb"
+
 	"github.com/paketo-buildpacks/libpak"
 )
 
@@ -29,7 +29,7 @@ type Properties struct {
 	Bindings libcnb.Bindings
 }
 
-func (p Properties) Execute() ([]string, error) {
+func (p Properties) Execute() (map[string]string, error) {
 	br := libpak.BindingResolver{Bindings: p.Bindings}
 
 	b, ok, err := br.Resolve("ApplicationInsights")
@@ -39,15 +39,16 @@ func (p Properties) Execute() ([]string, error) {
 		return nil, nil
 	}
 
-	var vars []string
+	fmt.Println("Configuring Azure Application Insight properties")
+
+	e := make(map[string]string, len(b.Secret))
 	for k, v := range b.Secret {
 		s := strings.ToUpper(k)
 		s = strings.ReplaceAll(s, "-", "_")
 		s = strings.ReplaceAll(s, ".", "_")
 
-		vars = append(vars, fmt.Sprintf(`export APPINSIGHTS_%s="%s"`, s, v))
+		e[fmt.Sprintf("APPINSIGHTS_%s", s)] = v
 	}
 
-	sort.Strings(vars)
-	return vars, nil
+	return e, nil
 }

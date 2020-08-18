@@ -29,6 +29,5 @@ func TestUnit(t *testing.T) {
 	suite("Detect", testDetect)
 	suite("JavaAgent", testJavaAgent)
 	suite("NodeJSAgent", testNodeJSAgent)
-	suite("Properties", testProperties)
 	suite.Run(t)
 }
