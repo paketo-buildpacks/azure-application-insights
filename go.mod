@@ -9,5 +9,3 @@ require (
 	github.com/sclevine/spec v1.4.0
 	github.com/stretchr/testify v1.6.1
 )
-
-replace github.com/paketo-buildpacks/libpak => ../libpak
