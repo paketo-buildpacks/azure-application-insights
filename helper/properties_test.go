@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package properties_test
+package helper_test
 
 import (
 	"testing"
@@ -23,14 +23,14 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/sclevine/spec"
 
-	"github.com/paketo-buildpacks/azure-application-insights/properties"
+	"github.com/paketo-buildpacks/azure-application-insights/helper"
 )
 
 func testProperties(t *testing.T, context spec.G, it spec.S) {
 	var (
 		Expect = NewWithT(t).Expect
 
-		p properties.Properties
+		p helper.Properties
 	)
 
 	it("does not contribute properties if no binding exists", func() {

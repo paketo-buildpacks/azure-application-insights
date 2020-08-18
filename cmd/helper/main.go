@@ -21,15 +21,16 @@ import (
 
 	"github.com/buildpacks/libcnb"
 
-	"github.com/paketo-buildpacks/azure-application-insights/properties"
 	"github.com/paketo-buildpacks/libpak/sherpa"
+
+	"github.com/paketo-buildpacks/azure-application-insights/helper"
 )
 
 func main() {
 	sherpa.Execute(func() error {
 		var (
 			err error
-			p   properties.Properties
+			p   helper.Properties
 		)
 
 		p.Bindings, err = libcnb.NewBindingsFromEnvironment()
