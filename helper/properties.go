@@ -21,12 +21,14 @@ import (
 	"strings"
 
 	"github.com/buildpacks/libcnb"
+	"github.com/paketo-buildpacks/libpak/bard"
 
 	"github.com/paketo-buildpacks/libpak"
 )
 
 type Properties struct {
 	Bindings libcnb.Bindings
+	Logger   bard.Logger
 }
 
 func (p Properties) Execute() (map[string]string, error) {
@@ -39,7 +41,7 @@ func (p Properties) Execute() (map[string]string, error) {
 		return nil, nil
 	}
 
-	fmt.Println("Configuring Azure Application Insight properties")
+	p.Logger.Info("Configuring Azure Application Insight properties")
 
 	e := make(map[string]string, len(b.Secret))
 	for k, v := range b.Secret {

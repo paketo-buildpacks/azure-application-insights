@@ -18,8 +18,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/buildpacks/libcnb"
+	"github.com/paketo-buildpacks/libpak/bard"
 
 	"github.com/paketo-buildpacks/libpak/sherpa"
 
@@ -30,7 +32,7 @@ func main() {
 	sherpa.Execute(func() error {
 		var (
 			err error
-			p   helper.Properties
+			p   = helper.Properties{Logger: bard.NewLogger(os.Stdout)}
 		)
 
 		p.Bindings, err = libcnb.NewBindingsFromEnvironment()
