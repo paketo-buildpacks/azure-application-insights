@@ -52,7 +52,8 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 		if err := sherpa.CopyFile(artifact, file); err != nil {
 			return libcnb.Layer{}, fmt.Errorf("unable to copy %s to %s\n%w", artifact.Name(), file, err)
 		}
-		layer.LaunchEnvironment.Appendf("JAVA_TOOL_OPTIONS", " -javaagent:%s", file)
+		layer.LaunchEnvironment.Delimiter("JAVA_TOOL_OPTIONS", " ")
+		layer.LaunchEnvironment.Appendf("JAVA_TOOL_OPTIONS", "-javaagent:%s", file)
 
 		file = filepath.Join(j.BuildpackPath, "resources", "AI-Agent.xml")
 		in, err := os.Open(file)
