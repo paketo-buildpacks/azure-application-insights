@@ -65,9 +65,8 @@ func (n NodeJSAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 
 		layer.LaunchEnvironment.PrependPath("NODE_PATH", filepath.Join(layer.Path, "node_modules"))
 
-		layer.Launch = true
 		return layer, nil
-	})
+	}, libpak.LaunchLayer)
 	if err != nil {
 		return libcnb.Layer{}, fmt.Errorf("unable to install node module\n%w", err)
 	}
