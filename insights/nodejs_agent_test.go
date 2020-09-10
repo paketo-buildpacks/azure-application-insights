@@ -88,7 +88,8 @@ func testNodeJSAgent(t *testing.T, context spec.G, it spec.S) {
 				"stub-azure-application-insights-agent.tgz"),
 		}))
 
-		Expect(layer.LaunchEnvironment["NODE_PATH"]).To(Equal(filepath.Join(layer.Path, "node_modules")))
+		Expect(layer.LaunchEnvironment["NODE_PATH.delim"]).To(Equal(string(os.PathListSeparator)))
+		Expect(layer.LaunchEnvironment["NODE_PATH.prepend"]).To(Equal(filepath.Join(layer.Path, "node_modules")))
 	})
 
 	it("requires applicationinsights module", func() {
