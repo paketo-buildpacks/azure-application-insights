@@ -29,9 +29,9 @@ id = "org.cloudfoundry.stacks.cflinuxfs3"
 [[metadata.dependencies]]
 id      = "azure-application-insights-java"
 name    = "Azure Application Insights Java Agent"
-version = "0.0.0"
-uri     = "placeholder"
-sha256  = "placeholder"
+version = "2.6.2"
+uri     = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/2.6.2/applicationinsights-agent-2.6.2.jar"
+sha256  = "289c428197fddc9075c3f4a96146a86fbb43f966f8ba9f07e690d41dd75a1785"
 stacks  = [ "io.buildpacks.stacks.bionic", "org.cloudfoundry.stacks.cflinuxfs3" ]
 
   [[metadata.dependencies.licenses]]
