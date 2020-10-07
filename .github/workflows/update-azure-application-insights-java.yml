@@ -42,7 +42,7 @@ jobs:
             - id: dependency
               uses: docker://ghcr.io/paketo-buildpacks/actions/github-release-dependency:main
               with:
-                glob: applicationinsights-agent-*.jar
+                glob: applicationinsights-agent-.+.jar
                 owner: Microsoft
                 pre_release: false
                 repository: ApplicationInsights-Java
