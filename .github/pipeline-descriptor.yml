@@ -1,3 +1,5 @@
+github_token: ${{ secrets.JAVA_GITHUB_TOKEN }}
+
 codeowners:
 - path:  "*"
   owner: "@paketo-buildpacks/java-buildpacks"
@@ -20,7 +22,7 @@ dependencies:
     owner:       Microsoft
     pre_release: false
     repository:  ApplicationInsights-Java
-    token:       ${{ secrets.GITHUB_TOKEN }}
+    token:       ${{ secrets.JAVA_GITHUB_TOKEN }}
 - id:   azure-application-insights-nodejs
   uses: docker://ghcr.io/paketo-buildpacks/actions/npm-dependency:main
   with:
