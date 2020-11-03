@@ -22,8 +22,7 @@ import (
 
 	"github.com/buildpacks/libcnb"
 	"github.com/paketo-buildpacks/libpak/bard"
-
-	"github.com/paketo-buildpacks/libpak"
+	"github.com/paketo-buildpacks/libpak/bindings"
 )
 
 type Properties struct {
@@ -32,9 +31,7 @@ type Properties struct {
 }
 
 func (p Properties) Execute() (map[string]string, error) {
-	br := libpak.BindingResolver{Bindings: p.Bindings}
-
-	b, ok, err := br.Resolve("ApplicationInsights")
+	b, ok, err := bindings.ResolveOne(p.Bindings, bindings.OfType("ApplicationInsights"))
 	if err != nil {
 		return nil, fmt.Errorf("unable to resolve binding ApplicationInsights\n%w", err)
 	} else if !ok {
