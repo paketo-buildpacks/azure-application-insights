@@ -15,16 +15,21 @@
 api = "0.4"
 
 [buildpack]
-id       = "paketo-buildpacks/azure-application-insights"
-name     = "Paketo Azure Application Insights Buildpack"
+id       = "paketo-buildpacks/microsoft-azure"
+name     = "Paketo Microsoft Azure Buildpack"
 version  = "{{.version}}"
-homepage = "https://github.com/paketo-buildpacks/azure-application-insights"
+homepage = "https://github.com/paketo-buildpacks/microsoft-azure"
 
 [[stacks]]
 id = "io.buildpacks.stacks.bionic"
 
 [[stacks]]
 id = "org.cloudfoundry.stacks.cflinuxfs3"
+
+[[metadata.configurations]]
+name        = "BP_AZURE_APPLICATION_INSIGHTS_ENABLED"
+description = "whether to contribute Azure Application Insights support"
+build       = true
 
 [[metadata.dependencies]]
 id      = "azure-application-insights-java"

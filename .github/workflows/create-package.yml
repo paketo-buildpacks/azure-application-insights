@@ -137,7 +137,7 @@ jobs:
                     --config "${HOME}"/package.toml
                 fi
               env:
-                PACKAGE: gcr.io/paketo-buildpacks/azure-application-insights
+                PACKAGE: gcr.io/paketo-buildpacks/microsoft-azure
                 PUBLISH: "true"
                 VERSION: ${{ steps.version.outputs.version }}
             - name: Update release with digest
@@ -164,7 +164,7 @@ jobs:
                 GITHUB_TOKEN: ${{ secrets.JAVA_GITHUB_TOKEN }}
             - uses: docker://ghcr.io/buildpacks/actions/registry:main
               with:
-                address: gcr.io/paketo-buildpacks/azure-application-insights@${{ steps.package.outputs.digest }}
-                id: paketo-buildpacks/azure-application-insights
+                address: gcr.io/paketo-buildpacks/microsoft-azure@${{ steps.package.outputs.digest }}
+                id: paketo-buildpacks/microsoft-azure
                 token: ${{ secrets.JAVA_GITHUB_TOKEN }}
                 version: ${{ steps.version.outputs.version }}

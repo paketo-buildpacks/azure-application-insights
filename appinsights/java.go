@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package insights
+package appinsights
 
 import (
 	"fmt"
@@ -22,27 +22,31 @@ import (
 	"path/filepath"
 
 	"github.com/buildpacks/libcnb"
+
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
 	"github.com/paketo-buildpacks/libpak/sherpa"
+	"github.com/paketo-buildpacks/microsoft-azure/internal/common"
 )
 
-type JavaAgent struct {
+const AgentPath = "BPI_AZURE_APPLICATION_INSIGHTS_AGENT_PATH"
+
+type JavaBuild struct {
 	BuildpackPath    string
 	LayerContributor libpak.DependencyLayerContributor
 	Logger           bard.Logger
 }
 
-func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache,
-	plan *libcnb.BuildpackPlan) JavaAgent {
+func NewJavaBuild(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache,
+	plan *libcnb.BuildpackPlan) JavaBuild {
 
-	return JavaAgent{
+	return JavaBuild{
 		BuildpackPath:    buildpackPath,
 		LayerContributor: libpak.NewDependencyLayerContributor(dependency, cache, plan),
 	}
 }
 
-func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
+func (j JavaBuild) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	j.LayerContributor.Logger = j.Logger
 
 	return j.LayerContributor.Contribute(layer, func(artifact *os.File) (libcnb.Layer, error) {
@@ -52,7 +56,8 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 		if err := sherpa.CopyFile(artifact, file); err != nil {
 			return libcnb.Layer{}, fmt.Errorf("unable to copy %s to %s\n%w", artifact.Name(), file, err)
 		}
-		layer.LaunchEnvironment.Appendf("JAVA_TOOL_OPTIONS", " ", "-javaagent:%s", file)
+
+		layer.LaunchEnvironment.Default(AgentPath, file)
 
 		file = filepath.Join(j.BuildpackPath, "resources", "AI-Agent.xml")
 		in, err := os.Open(file)
@@ -70,6 +75,30 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	}, libpak.LaunchLayer)
 }
 
-func (j JavaAgent) Name() string {
+func (j JavaBuild) Name() string {
 	return j.LayerContributor.LayerName()
+}
+
+type JavaLaunch struct {
+	CredentialSource common.CredentialSource
+	Logger           bard.Logger
+}
+
+// https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-agent
+func (j JavaLaunch) Execute() (map[string]string, error) {
+	if j.CredentialSource == common.None {
+		j.Logger.Info("Azure Application Insights disabled")
+		return nil, nil
+	}
+
+	p, err := sherpa.GetEnvRequired(AgentPath)
+	if err != nil {
+		return nil, err
+	}
+
+	j.Logger.Info("Azure Application Insights enabled")
+
+	return map[string]string{
+		"JAVA_TOOL_OPTIONS": sherpa.AppendToEnvVar("JAVA_TOOL_OPTIONS", " ", fmt.Sprintf("-javaagent:%s", p)),
+	}, nil
 }

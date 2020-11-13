@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package insights_test
+package azure_test
 
 import (
 	"testing"
 
 	"github.com/buildpacks/libcnb"
 	. "github.com/onsi/gomega"
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/sclevine/spec"
 
-	"github.com/paketo-buildpacks/azure-application-insights/insights"
+	"github.com/paketo-buildpacks/libpak"
+	azure "github.com/paketo-buildpacks/microsoft-azure"
+	"github.com/paketo-buildpacks/microsoft-azure/internal/common"
+
+	"github.com/sclevine/spec"
 )
 
 func testBuild(t *testing.T, context spec.G, it spec.S) {
@@ -34,34 +36,23 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		ctx libcnb.BuildContext
 	)
 
-	it("contributes Java agent", func() {
-		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: "azure-application-insights-java"})
-		ctx.Buildpack.Metadata = map[string]interface{}{
-			"dependencies": []map[string]interface{}{
-				{
-					"id":      "azure-application-insights-java",
-					"version": "1.1.1",
-					"stacks":  []interface{}{"test-stack-id"},
-				},
-			},
-		}
-		ctx.StackID = "test-stack-id"
+	it("contributes credentials", func() {
+		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: common.Credentials})
 
-		result, err := insights.Build{}.Build(ctx)
+		result, err := azure.Build{}.Build(ctx)
 		Expect(err).NotTo(HaveOccurred())
 
-		Expect(result.Layers).To(HaveLen(2))
-		Expect(result.Layers[0].Name()).To(Equal("azure-application-insights-java"))
-		Expect(result.Layers[1].Name()).To(Equal("helper"))
-		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
+		Expect(result.Layers).To(HaveLen(1))
+		Expect(result.Layers[0].Name()).To(Equal("helper"))
+		Expect(result.Layers[0].(libpak.HelperLayerContributor).Names).To(Equal([]string{common.Credentials}))
 	})
 
-	it("contributes NodeJS agent", func() {
-		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: "azure-application-insights-nodejs"})
+	it("contributes appinsights Java", func() {
+		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: common.ApplicationInsightsJava})
 		ctx.Buildpack.Metadata = map[string]interface{}{
 			"dependencies": []map[string]interface{}{
 				{
-					"id":      "azure-application-insights-nodejs",
+					"id":      common.ApplicationInsightsJava,
 					"version": "1.1.1",
 					"stacks":  []interface{}{"test-stack-id"},
 				},
@@ -69,12 +60,34 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		}
 		ctx.StackID = "test-stack-id"
 
-		result, err := insights.Build{}.Build(ctx)
+		result, err := azure.Build{}.Build(ctx)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(result.Layers).To(HaveLen(2))
-		Expect(result.Layers[0].Name()).To(Equal("azure-application-insights-nodejs"))
+		Expect(result.Layers[0].Name()).To(Equal(common.ApplicationInsightsJava))
 		Expect(result.Layers[1].Name()).To(Equal("helper"))
-		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
+		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{common.ApplicationInsightsJava}))
+	})
+
+	it("contributes appinsights NodeJS", func() {
+		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: common.ApplicationInsightsNodeJS})
+		ctx.Buildpack.Metadata = map[string]interface{}{
+			"dependencies": []map[string]interface{}{
+				{
+					"id":      common.ApplicationInsightsNodeJS,
+					"version": "1.1.1",
+					"stacks":  []interface{}{"test-stack-id"},
+				},
+			},
+		}
+		ctx.StackID = "test-stack-id"
+
+		result, err := azure.Build{}.Build(ctx)
+		Expect(err).NotTo(HaveOccurred())
+
+		Expect(result.Layers).To(HaveLen(2))
+		Expect(result.Layers[0].Name()).To(Equal(common.ApplicationInsightsNodeJS))
+		Expect(result.Layers[1].Name()).To(Equal("helper"))
+		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{common.ApplicationInsightsNodeJS}))
 	})
 }

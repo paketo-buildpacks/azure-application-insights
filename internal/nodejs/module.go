@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package main
+package nodejs
 
 import (
-	"os"
-
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
-	"github.com/paketo-buildpacks/microsoft-azure"
+	"fmt"
+	"regexp"
 )
 
-func main() {
-	libpak.Main(
-		azure.Detect{},
-		azure.Build{Logger: bard.NewLogger(os.Stdout)},
-	)
+func IsModuleRequired(module string, content []byte) (bool, error) {
+	p := fmt.Sprintf(`require\(['"]%s['"]\)`, module)
+
+	r, err := regexp.Compile(p)
+	if err != nil {
+		return false, fmt.Errorf("unable to compiler regex '%s'\n%w", p, err)
+	}
+
+	return r.Match(content), nil
+}
+
+func RequireModule(module string) []byte {
+	return []byte(fmt.Sprintf("require('%s').start();\n", module))
+
 }

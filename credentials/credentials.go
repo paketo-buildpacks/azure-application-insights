@@ -14,40 +14,30 @@
  * limitations under the License.
  */
 
-package helper
+package credentials
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/buildpacks/libcnb"
+
 	"github.com/paketo-buildpacks/libpak/bard"
-	"github.com/paketo-buildpacks/libpak/bindings"
+	"github.com/paketo-buildpacks/microsoft-azure/internal/common"
 )
 
-type Properties struct {
-	Bindings libcnb.Bindings
-	Logger   bard.Logger
+type Launch struct {
+	Binding          libcnb.Binding
+	CredentialSource common.CredentialSource
+	Logger           bard.Logger
 }
 
-func (p Properties) Execute() (map[string]string, error) {
-	b, ok, err := bindings.ResolveOne(p.Bindings, bindings.OfType("ApplicationInsights"))
-	if err != nil {
-		return nil, fmt.Errorf("unable to resolve binding ApplicationInsights\n%w", err)
-	} else if !ok {
+func (l Launch) Execute() (map[string]string, error) {
+	if l.CredentialSource == common.MetadataServer || l.CredentialSource == common.None {
 		return nil, nil
 	}
 
-	p.Logger.Info("Configuring Azure Application Insight properties")
-
-	e := make(map[string]string, len(b.Secret))
-	for k, v := range b.Secret {
-		s := strings.ToUpper(k)
-		s = strings.ReplaceAll(s, "-", "_")
-		s = strings.ReplaceAll(s, ".", "_")
-
-		e[fmt.Sprintf("APPINSIGHTS_%s", s)] = v
+	if s, ok := l.Binding.Secret["InstrumentationKey"]; ok {
+		l.Logger.Info("Configuring Azure Application Insights instrumentation key")
+		return map[string]string{"APPINSIGHTS_INSTRUMENTATIONKEY": s}, nil
 	}
 
-	return e, nil
+	return nil, nil
 }
