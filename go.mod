@@ -1,4 +1,4 @@
-module github.com/paketo-buildpacks/azure-application-insights
+module github.com/paketo-buildpacks/microsoft-azure
 
 go 1.15
 
@@ -9,3 +9,5 @@ require (
 	github.com/sclevine/spec v1.4.0
 	github.com/stretchr/testify v1.7.0
 )
+
+replace github.com/paketo-buildpacks/libpak => ../../paketo-buildpacks/libpak

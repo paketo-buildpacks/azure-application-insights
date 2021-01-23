@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package main
+package nodejs_test
 
 import (
-	"os"
+	"testing"
 
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
-	"github.com/paketo-buildpacks/microsoft-azure"
+	"github.com/sclevine/spec"
+	"github.com/sclevine/spec/report"
 )
 
-func main() {
-	libpak.Main(
-		azure.Detect{},
-		azure.Build{Logger: bard.NewLogger(os.Stdout)},
-	)
+func TestUnit(t *testing.T) {
+	suite := spec.New("nodejs", spec.Report(report.Terminal{}))
+	suite("Module", testModule)
+	suite.Run(t)
 }

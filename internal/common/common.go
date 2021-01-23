@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package insights_test
+package common
 
-import (
-	"testing"
-
-	"github.com/sclevine/spec"
-	"github.com/sclevine/spec/report"
+const (
+	ApplicationInsightsJava   = "azure-application-insights-java"
+	ApplicationInsightsNodeJS = "azure-application-insights-nodejs"
+	Credentials               = "azure-credentials"
 )
 
-func TestUnit(t *testing.T) {
-	suite := spec.New("insights", spec.Report(report.Terminal{}))
-	suite("Build", testBuild)
-	suite("Detect", testDetect)
-	suite("JavaAgent", testJavaAgent)
-	suite("NodeJSAgent", testNodeJSAgent)
-	suite.Run(t)
-}
+type CredentialSource uint8
+
+const (
+	Binding CredentialSource = iota
+	MetadataServer
+	None
+)

@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package main
+package azure_test
 
 import (
-	"os"
+	"testing"
 
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
-	"github.com/paketo-buildpacks/microsoft-azure"
+	"github.com/sclevine/spec"
+	"github.com/sclevine/spec/report"
 )
 
-func main() {
-	libpak.Main(
-		azure.Detect{},
-		azure.Build{Logger: bard.NewLogger(os.Stdout)},
-	)
+func TestUnit(t *testing.T) {
+	suite := spec.New("azure", spec.Report(report.Terminal{}))
+	suite("Build", testBuild)
+	suite("Detect", testDetect)
+	suite.Run(t)
 }

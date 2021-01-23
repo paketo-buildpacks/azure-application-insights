@@ -14,21 +14,30 @@
  * limitations under the License.
  */
 
-package insights
+package azure
 
 import (
 	"fmt"
 
 	"github.com/buildpacks/libcnb"
-	"github.com/paketo-buildpacks/libpak/bindings"
+
+	"github.com/paketo-buildpacks/libpak"
+	"github.com/paketo-buildpacks/microsoft-azure/internal/common"
+)
+
+const (
+	ApplicationInsightsEnabled = "BP_AZURE_APPLICATION_INSIGHTS_ENABLED"
 )
 
 type Detect struct{}
 
 func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error) {
-	if _, ok, err := bindings.ResolveOne(context.Platform.Bindings, bindings.OfType("ApplicationInsights")); err != nil {
-		return libcnb.DetectResult{}, fmt.Errorf("unable to resolve binding ApplicationInsights\n%w", err)
-	} else if !ok {
+	cr, err := libpak.NewConfigurationResolver(context.Buildpack, nil)
+	if err != nil {
+		return libcnb.DetectResult{}, fmt.Errorf("unable to create configuration resolver\n%w", err)
+	}
+
+	if !cr.ResolveBool(ApplicationInsightsEnabled) {
 		return libcnb.DetectResult{Pass: false}, nil
 	}
 
@@ -37,20 +46,38 @@ func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error
 		Plans: []libcnb.BuildPlan{
 			{
 				Provides: []libcnb.BuildPlanProvide{
-					{Name: "azure-application-insights-java"},
+					{Name: common.ApplicationInsightsJava},
+					{Name: common.ApplicationInsightsNodeJS},
+					{Name: common.Credentials},
 				},
 				Requires: []libcnb.BuildPlanRequire{
-					{Name: "azure-application-insights-java"},
+					{Name: common.ApplicationInsightsJava},
 					{Name: "jvm-application"},
+					{Name: common.ApplicationInsightsNodeJS},
+					{Name: "node", Metadata: map[string]interface{}{"build": true}},
+					{Name: common.Credentials},
 				},
 			},
 			{
 				Provides: []libcnb.BuildPlanProvide{
-					{Name: "azure-application-insights-nodejs"},
+					{Name: common.ApplicationInsightsJava},
+					{Name: common.Credentials},
 				},
 				Requires: []libcnb.BuildPlanRequire{
-					{Name: "azure-application-insights-nodejs"},
+					{Name: common.ApplicationInsightsJava},
+					{Name: "jvm-application"},
+					{Name: common.Credentials},
+				},
+			},
+			{
+				Provides: []libcnb.BuildPlanProvide{
+					{Name: common.ApplicationInsightsNodeJS},
+					{Name: common.Credentials},
+				},
+				Requires: []libcnb.BuildPlanRequire{
+					{Name: common.ApplicationInsightsNodeJS},
 					{Name: "node", Metadata: map[string]interface{}{"build": true}},
+					{Name: common.Credentials},
 				},
 			},
 		},

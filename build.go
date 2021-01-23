@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package insights
+package azure
 
 import (
 	"fmt"
 
 	"github.com/buildpacks/libcnb"
+
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/microsoft-azure/appinsights"
+	"github.com/paketo-buildpacks/microsoft-azure/internal/common"
 )
 
 type Build struct {
@@ -45,33 +48,45 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 	}
 	dc.Logger = b.Logger
 
-	if _, ok, err := pr.Resolve("azure-application-insights-java"); err != nil {
-		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve azure-application-insights-java plan entry\n%w", err)
+	var names []string
+
+	if _, ok, err := pr.Resolve(common.Credentials); err != nil {
+		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve %s plan entry\n%w", common.Credentials, err)
 	} else if ok {
-		dep, err := dr.Resolve("azure-application-insights-java", "")
+		names = append(names, common.Credentials)
+	}
+
+	if _, ok, err := pr.Resolve(common.ApplicationInsightsJava); err != nil {
+		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve %s plan entry\n%w", common.ApplicationInsightsJava, err)
+	} else if ok {
+		dep, err := dr.Resolve(common.ApplicationInsightsJava, "")
 		if err != nil {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
 		}
 
-		ja := NewJavaAgent(context.Buildpack.Path, dep, dc, result.Plan)
+		ja := appinsights.NewJavaBuild(context.Buildpack.Path, dep, dc, result.Plan)
 		ja.Logger = b.Logger
 		result.Layers = append(result.Layers, ja)
+
+		names = append(names, common.ApplicationInsightsJava)
 	}
 
-	if _, ok, err := pr.Resolve("azure-application-insights-nodejs"); err != nil {
-		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve azure-application-insights-nodejs plan entry\n%w", err)
+	if _, ok, err := pr.Resolve(common.ApplicationInsightsNodeJS); err != nil {
+		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve %s plan entry\n%w", common.ApplicationInsightsNodeJS, err)
 	} else if ok {
-		dep, err := dr.Resolve("azure-application-insights-nodejs", "")
+		dep, err := dr.Resolve(common.ApplicationInsightsNodeJS, "")
 		if err != nil {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
 		}
 
-		na := NewNodeJSAgent(context.Application.Path, dep, dc, result.Plan)
+		na := appinsights.NewNodeJSBuild(dep, dc, result.Plan)
 		na.Logger = b.Logger
 		result.Layers = append(result.Layers, na)
+
+		names = append(names, common.ApplicationInsightsNodeJS)
 	}
 
-	h := libpak.NewHelperLayerContributor(context.Buildpack, result.Plan, "properties")
+	h := libpak.NewHelperLayerContributor(context.Buildpack, result.Plan, names...)
 	h.Logger = b.Logger
 	result.Layers = append(result.Layers, h)
 
