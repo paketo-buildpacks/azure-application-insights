@@ -33,13 +33,14 @@ type JavaAgent struct {
 	Logger           bard.Logger
 }
 
-func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache,
-	plan *libcnb.BuildpackPlan) JavaAgent {
-
+func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache) (JavaAgent, libcnb.BOMEntry) {
+	contributor, entry := libpak.NewDependencyLayer(dependency, cache, libcnb.LayerTypes{
+		Launch: true,
+	})
 	return JavaAgent{
 		BuildpackPath:    buildpackPath,
-		LayerContributor: libpak.NewDependencyLayerContributor(dependency, cache, plan),
-	}
+		LayerContributor: contributor,
+	}, entry
 }
 
 func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
@@ -67,7 +68,7 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 		}
 
 		return layer, nil
-	}, libpak.LaunchLayer)
+	})
 }
 
 func (j JavaAgent) Name() string {

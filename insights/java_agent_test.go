@@ -64,7 +64,10 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 		}
 		dc := libpak.DependencyCache{CachePath: "testdata"}
 
-		j := insights.NewJavaAgent(ctx.Buildpack.Path, dep, dc, &libcnb.BuildpackPlan{})
+		j, entry := insights.NewJavaAgent(ctx.Buildpack.Path, dep, dc)
+		Expect(entry.Launch).To(BeTrue())
+		Expect(entry.Metadata["uri"]).To(Equal("https://localhost/stub-azure-application-insights-agent.jar"))
+
 		layer, err := ctx.Layers.Layer("test-layer")
 		Expect(err).NotTo(HaveOccurred())
 
