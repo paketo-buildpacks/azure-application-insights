@@ -70,7 +70,10 @@ func testNodeJSAgent(t *testing.T, context spec.G, it spec.S) {
 		}
 		dc := libpak.DependencyCache{CachePath: "testdata"}
 
-		n := insights.NewNodeJSAgent(ctx.Application.Path, dep, dc, &libcnb.BuildpackPlan{})
+		n, entry := insights.NewNodeJSAgent(ctx.Application.Path, dep, dc)
+		Expect(entry.Metadata["uri"]).To(Equal("https://localhost/stub-azure-application-insights-agent.tgz"))
+		Expect(entry.Launch).To(BeTrue())
+
 		n.Executor = executor
 		layer, err := ctx.Layers.Layer("test-layer")
 		Expect(err).NotTo(HaveOccurred())
@@ -103,7 +106,10 @@ func testNodeJSAgent(t *testing.T, context spec.G, it spec.S) {
 		}
 		dc := libpak.DependencyCache{CachePath: "testdata"}
 
-		n := insights.NewNodeJSAgent(ctx.Application.Path, dep, dc, &libcnb.BuildpackPlan{})
+		n, entry := insights.NewNodeJSAgent(ctx.Application.Path, dep, dc)
+		Expect(entry.Metadata["uri"]).To(Equal("https://localhost/stub-azure-application-insights-agent.tgz"))
+		Expect(entry.Launch).To(BeTrue())
+
 		n.Executor = executor
 		layer, err := ctx.Layers.Layer("test-layer")
 		Expect(err).NotTo(HaveOccurred())
@@ -127,7 +133,10 @@ func testNodeJSAgent(t *testing.T, context spec.G, it spec.S) {
 		}
 		dc := libpak.DependencyCache{CachePath: "testdata"}
 
-		n := insights.NewNodeJSAgent(ctx.Application.Path, dep, dc, &libcnb.BuildpackPlan{})
+		n, entry := insights.NewNodeJSAgent(ctx.Application.Path, dep, dc)
+		Expect(entry.Metadata["uri"]).To(Equal("https://localhost/stub-azure-application-insights-agent.tgz"))
+		Expect(entry.Launch).To(BeTrue())
+
 		n.Executor = executor
 		layer, err := ctx.Layers.Layer("test-layer")
 		Expect(err).NotTo(HaveOccurred())
