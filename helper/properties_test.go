@@ -42,10 +42,10 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 			{
 				Name:   "test-binding",
 				Type:   "ApplicationInsights",
-				Secret: map[string]string{"InstrumentationKey": "test-value"},
+				Secret: map[string]string{"connection-string": "test-value"},
 			},
 		}
 
-		Expect(p.Execute()).To(Equal(map[string]string{"APPINSIGHTS_INSTRUMENTATIONKEY": "test-value"}))
+		Expect(p.Execute()).To(Equal(map[string]string{"APPLICATIONINSIGHTS_CONNECTION_STRING": "test-value"}))
 	})
 }

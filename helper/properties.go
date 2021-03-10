@@ -46,7 +46,7 @@ func (p Properties) Execute() (map[string]string, error) {
 		s = strings.ReplaceAll(s, "-", "_")
 		s = strings.ReplaceAll(s, ".", "_")
 
-		e[fmt.Sprintf("APPINSIGHTS_%s", s)] = v
+		e[fmt.Sprintf("APPLICATIONINSIGHTS_%s", s)] = v
 	}
 
 	return e, nil
