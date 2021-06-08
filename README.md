@@ -29,3 +29,4 @@ The buildpack optionally accepts the following bindings:
 |`<dependency-digest>` | `<uri>` | If needed, the buildpack will fetch the dependency with digest `<dependency-digest>` from `<uri>`
 
 [a]: http://www.apache.org/licenses/LICENSE-2.0
+
