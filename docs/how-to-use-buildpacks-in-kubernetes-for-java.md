@@ -98,7 +98,7 @@ stringData:
 
 Additional settings may be added as key/value pairs in the secret.
 
-You also need to prepare at least 2 required items for Kubernetes deployment.
+You also need to prepare at least 2 required items for Kubernetes deployment. For example `deployment.yaml` seen below.
 
 * Mount the `Secret` as volume.
 * Point the environment variable `CNB_BINDINGS` to the path of mounted `Secret`.
@@ -128,7 +128,7 @@ spec:
 Apply the configuration with the following command:
 
 ```shell
-kubectl apply-f image.yaml
+kubectl apply -f deployment.yaml
 ```
 
 Finally, the Java application will bootup with the agent and consume the `Secret`
