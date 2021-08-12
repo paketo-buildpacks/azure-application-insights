@@ -1,21 +1,21 @@
-## How to use buildpacks in kubernetes for java
+## How to use buildpacks in Kubernetes for Java
 
 The Paketo Azure Application Insights Buildpack is a Cloud Native Buildpack
 that contributes the Application Insights Agent and configures it to connect
 to the service.
 
-This article describes how to use this buildpacks for java applications from
-the kubernetes environment.
+This article describes how to use this buildpack for Java applications from
+the Kubernetes environment.
 
 ### Preconditions
 
 * Kubernetes
-* BuildService
+* [kpack](https://github.com/pivotal/kpack) or [Tanzu Build Service](https://network.pivotal.io/products/build-service/)
 
 ### Build Phase
 
-You need to prepare one `ConfigMap` from kubernetes when build, it may be similar
-as below.
+You need to prepare one `ConfigMap` from Kubernetes when build. It may be similar
+to the example below.
 
 > Note: the type should be `ApplicationInsights`.
 
@@ -30,7 +30,7 @@ data:
   type: ApplicationInsights
 ```
 
-Then consume the `Confimap` from Image resource, for example image.yaml as below.
+Then consume the `Confimap` from an Image resource. For example `image.yaml` seen below.
 
 > Note: the `metadataRef` should point to the name of `ConfigMap` above.
 
@@ -41,7 +41,7 @@ metadata:
   name: sample-image
   namespace: build-service
 spec:
-  tag: xxxx.azurecr.io/sample-repo:sample-tag
+  tag: xxxx.example.com/sample-repo:sample-tag
   serviceAccount: sample-build-service
   builder:
     name: sample-builder
@@ -63,7 +63,7 @@ Now you can use below command to build the image.
 kubectl apply -f image.yaml
 ```
 
-If everything goes well, the output of build may contain below information.
+If everything goes well, the output of build will contain the information below.
 
 ```
 Paketo Azure Application Insights Buildpack 4.3.0
@@ -79,7 +79,7 @@ Paketo Azure Application Insights Buildpack 4.3.0
 
 ### Runtime Phase
 
-You need to prepare one `Secret` from kubernetes before the Java application bootup,
+It is important that the binding be present at runtime because the binding data is not embedded into the image, so you need to prepare one `Secret` in Kubernetes before the Java application bootup,
 it may be similar as below.
 
 > Note: the type should be `ApplicationInsights`.
@@ -96,7 +96,9 @@ stringData:
   sampling-percentage: "100.0"
 ```
 
-You also need to prepare at least 2 required items for kubernetes deployment.
+Additional settings may be added as key/value pairs in the secret.
+
+You also need to prepare at least 2 required items for Kubernetes deployment.
 
 * Mount the `Secret` as volume.
 * Point the environment variable `CNB_BINDINGS` to the path of mounted `Secret`.
@@ -113,7 +115,7 @@ spec:
         env:
         - name: CNB_BINDINGS
           value: /bindings
-        image: xxxx.azurecr.io/sample-repo:sample-tag
+        image: xxxx.example.com/sample-repo:sample-tag
         volumeMounts:
         - mountPath: /bindings/application-insights-settings
           name: sample-secret-volume
@@ -123,5 +125,12 @@ spec:
           secretName: sample-secret
 ```
 
+Apply the configuration with the following command:
+
+```shell
+kubectl apply-f image.yaml
+```
+
 Finally, the Java application will bootup with the agent and consume the `Secret`
 content as environment variables.
+
