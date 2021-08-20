@@ -50,8 +50,8 @@ github.com/onsi/gomega v1.10.1/go.mod h1:iN09h71vgCQne3DLsj+A5owkum+a2tYe+TOCB1y
 github.com/onsi/gomega v1.13.0/go.mod h1:lRk9szgn8TxENtWd0Tp4c3wjlRfMTMH27I+3Je41yGY=
 github.com/onsi/gomega v1.15.0 h1:WjP/FQ/sk43MRmnEcT+MlDw2TFvkrXlprrPST/IudjU=
 github.com/onsi/gomega v1.15.0/go.mod h1:cIuvLEne0aoVhAgh/O6ac0Op8WWw9H6eYCriF+tEHG0=
-github.com/paketo-buildpacks/libpak v1.52.1 h1:TxqhyShhbO4z/MeKPgN18JmTvuPfnnGuomuRnmkL82I=
-github.com/paketo-buildpacks/libpak v1.52.1/go.mod h1:1yqDcvUoIc4M4vuSiYbzm8T6gljpAjciVWXLTyI478k=
+github.com/paketo-buildpacks/libpak v1.52.2 h1:T2gL1iFq5tIo9Xf/TTkxzvzuWe/fHJ5L1wbWxFEBafE=
+github.com/paketo-buildpacks/libpak v1.52.2/go.mod h1:1yqDcvUoIc4M4vuSiYbzm8T6gljpAjciVWXLTyI478k=
 github.com/pelletier/go-toml v1.9.3 h1:zeC5b1GviRUyKYd6OJPvBU/mcVDVoL1OhT17FCt5dSQ=
 github.com/pelletier/go-toml v1.9.3/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
