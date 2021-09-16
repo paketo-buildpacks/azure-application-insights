@@ -50,9 +50,9 @@ stacks  = [ "io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*" ]
 [[metadata.dependencies]]
 id      = "azure-application-insights-nodejs"
 name    = "Azure Application Insights NodeJS Agent"
-version = "2.1.6"
-uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.1.6.tgz"
-sha256  = "e49755046de078bee3dc4267807c2397d4851c5fc02feb8fc80100e20112d57e"
+version = "2.1.7"
+uri     = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.1.7.tgz"
+sha256  = "889921a5c109eb923f595ce4c3e982cb7e030145a0b5bbb9c543005b97660887"
 stacks  = [ "io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*" ]
 
   [[metadata.dependencies.licenses]]
