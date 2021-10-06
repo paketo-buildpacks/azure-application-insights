@@ -38,9 +38,9 @@ id = "*"
 [[metadata.dependencies]]
 id      = "azure-application-insights-java"
 name    = "Azure Application Insights Java Agent"
-version = "3.1.1"
-uri     = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.1.1/applicationinsights-agent-3.1.1.jar"
-sha256  = "61228408d94e8c3a1a2b95fca5d5fd83dc8e91051c637de89c65d86452228ff0"
+version = "3.2.0"
+uri     = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.0/applicationinsights-agent-3.2.0.jar"
+sha256  = "08a2160eba781eac06ffd155e90e2f4b5cb1f9e53b435136d593ec88d4bafcc9"
 stacks  = [ "io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*" ]
 
   [[metadata.dependencies.licenses]]
