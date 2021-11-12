@@ -45,10 +45,10 @@ api = "0.6"
   [[metadata.dependencies]]
     id = "azure-application-insights-nodejs"
     name = "Azure Application Insights NodeJS Agent"
-    sha256 = "90d4e5b3695743239e7b1676968fe621aee3b526a73304f121d91e8f56878015"
+    sha256 = "6f094f5fc3ddd5be6a2892951f58c0c5694b9f58487199bbdadc65f867addab5"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.1.8.tgz"
-    version = "2.1.8"
+    uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.1.9.tgz"
+    version = "2.1.9"
 
     [[metadata.dependencies.licenses]]
       type = "MIT"
