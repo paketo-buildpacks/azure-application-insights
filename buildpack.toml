@@ -21,6 +21,7 @@ api = "0.6"
   keywords = ["java", "nodejs", "azure", "application-insights"]
   name = "Paketo Azure Application Insights Buildpack"
   version = "{{.version}}"
+  sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
 
   [[buildpack.licenses]]
     type = "Apache-2.0"
@@ -37,6 +38,10 @@ api = "0.6"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
     uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.3/applicationinsights-agent-3.2.3.jar"
     version = "3.2.3"
+    purl = "pkg:generic/azure-application-insights-java@3.2.3"
+    cpes = [
+      "cpe:2.3:a:microsoft:azure-application-insights-java:3.2.3:*:*:*:*:*:*:*"
+    ]
 
     [[metadata.dependencies.licenses]]
       type = "MIT"
@@ -49,6 +54,10 @@ api = "0.6"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
     uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.1.9.tgz"
     version = "2.1.9"
+    purl = "pkg:generic/azure-application-insights-nodejs@2.1.9"
+    cpes = [
+      "cpe:2.3:a:microsoft:azure-application-insights-nodejs:2.1.9:*:*:*:*:*:*:*"
+    ]
 
     [[metadata.dependencies.licenses]]
       type = "MIT"

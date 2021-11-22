@@ -46,6 +46,7 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 			},
 		}
 		ctx.StackID = "test-stack-id"
+		ctx.Buildpack.API = "0.6"
 
 		result, err := insights.Build{}.Build(ctx)
 		Expect(err).NotTo(HaveOccurred())
@@ -72,6 +73,7 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 			},
 		}
 		ctx.StackID = "test-stack-id"
+		ctx.Buildpack.API = "0.6"
 
 		result, err := insights.Build{}.Build(ctx)
 		Expect(err).NotTo(HaveOccurred())
