@@ -56,9 +56,7 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 		ja, be := NewJavaAgent(context.Buildpack.Path, dep, dc)
 		ja.Logger = b.Logger
 		result.Layers = append(result.Layers, ja)
-		if be.Name != "" {
-			result.BOM.Entries = append(result.BOM.Entries, be)
-		}
+		result.BOM.Entries = append(result.BOM.Entries, be)
 	}
 
 	if _, ok, err := pr.Resolve("azure-application-insights-nodejs"); err != nil {
@@ -72,17 +70,13 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 		na, be := NewNodeJSAgent(context.Application.Path, dep, dc)
 		na.Logger = b.Logger
 		result.Layers = append(result.Layers, na)
-		if be.Name != "" {
-			result.BOM.Entries = append(result.BOM.Entries, be)
-		}
+		result.BOM.Entries = append(result.BOM.Entries, be)
 	}
 
 	h, be := libpak.NewHelperLayer(context.Buildpack, "properties")
 	h.Logger = b.Logger
 	result.Layers = append(result.Layers, h)
-	if be.Name != "" {
-		result.BOM.Entries = append(result.BOM.Entries, be)
-	}
+	result.BOM.Entries = append(result.BOM.Entries, be)
 
 	return result, nil
 }
