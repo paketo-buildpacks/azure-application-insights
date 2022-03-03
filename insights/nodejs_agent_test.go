@@ -30,7 +30,7 @@ import (
 	"github.com/sclevine/spec"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/paketo-buildpacks/azure-application-insights/insights"
+	"github.com/paketo-buildpacks/azure-application-insights/v5/insights"
 )
 
 func testNodeJSAgent(t *testing.T, context spec.G, it spec.S) {

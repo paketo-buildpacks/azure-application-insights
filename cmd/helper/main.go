@@ -25,7 +25,7 @@ import (
 
 	"github.com/paketo-buildpacks/libpak/sherpa"
 
-	"github.com/paketo-buildpacks/azure-application-insights/helper"
+	"github.com/paketo-buildpacks/azure-application-insights/v5/helper"
 )
 
 func main() {
