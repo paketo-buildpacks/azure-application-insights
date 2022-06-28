@@ -32,14 +32,14 @@ api = "0.7"
   pre-package = "scripts/build.sh"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-java:3.2.11:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-java:3.3.0:*:*:*:*:*:*:*"]
     id = "azure-application-insights-java"
     name = "Azure Application Insights Java Agent"
-    purl = "pkg:generic/azure-application-insights-java@3.2.11"
-    sha256 = "9bf6a6faa024dc87c3a6dcacdb170b99d125b3ce2518ac80dfc227bc6acc62f2"
+    purl = "pkg:generic/azure-application-insights-java@3.3.0"
+    sha256 = "7b608492c98b9d3562eeab6c2245488157aedd5e7a027e2f74eb6464ad96aaee"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.2.11/applicationinsights-agent-3.2.11.jar"
-    version = "3.2.11"
+    uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.3.0/applicationinsights-agent-3.3.0.jar"
+    version = "3.3.0"
 
     [[metadata.dependencies.licenses]]
       type = "MIT"
