@@ -19,7 +19,7 @@ api = "0.7"
   homepage = "https://github.com/paketo-buildpacks/azure-application-insights"
   id = "paketo-buildpacks/azure-application-insights"
   keywords = ["java", "nodejs", "azure", "application-insights"]
-  name = "Paketo Azure Application Insights Buildpack"
+  name = "Paketo Buildpack for Azure Application Insights"
   sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
   version = "{{.version}}"
 
