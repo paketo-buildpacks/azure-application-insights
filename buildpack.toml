@@ -32,28 +32,28 @@ api = "0.7"
   pre-package = "scripts/build.sh"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-java:3.4.7:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-java:3.4.8:*:*:*:*:*:*:*"]
     id = "azure-application-insights-java"
     name = "Azure Application Insights Java Agent"
-    purl = "pkg:generic/azure-application-insights-java@3.4.7"
-    sha256 = "6092172e61ef30220352dd71ef1bd6667aa1078fea975fea255c9ccc99cc4bc8"
+    purl = "pkg:generic/azure-application-insights-java@3.4.8"
+    sha256 = "8f0b98041b810ed6516e5f231c3b4d6ba66fad270edab8cbd0983615d9e2badf"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.4.7/applicationinsights-agent-3.4.7.jar"
-    version = "3.4.7"
+    uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.4.8/applicationinsights-agent-3.4.8.jar"
+    version = "3.4.8"
 
     [[metadata.dependencies.licenses]]
       type = "MIT"
       uri = "https://github.com/Microsoft/ApplicationInsights-Java/blob/master/LICENSE.txt"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-nodejs:2.4.0:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-nodejs:2.4.1:*:*:*:*:*:*:*"]
     id = "azure-application-insights-nodejs"
     name = "Azure Application Insights NodeJS Agent"
-    purl = "pkg:generic/azure-application-insights-nodejs@2.4.0"
-    sha256 = "86e9620cfe22d98a9da31c8443aefde399a6a624c5bad2d7a4b01aca2ff7033c"
+    purl = "pkg:generic/azure-application-insights-nodejs@2.4.1"
+    sha256 = "7a1bd5b6fd2c161ce4f016507a7cd991640d53738fc8d6b347f8777fd99f79be"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.4.0.tgz"
-    version = "2.4.0"
+    uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-2.4.1.tgz"
+    version = "2.4.1"
 
     [[metadata.dependencies.licenses]]
       type = "MIT"
