@@ -9,7 +9,7 @@ codeowners:
 package:
   repositories:   ["docker.io/paketobuildpacks/azure-application-insights","gcr.io/paketo-buildpacks/azure-application-insights"]
   register:       true
-  registry_token: ${ secrets.PAKETO_BOT_GITHUB_TOKEN }
+  registry_token: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
 
 docker_credentials:
 - registry: gcr.io
