@@ -37,10 +37,10 @@ api = "0.7"
     name = "Azure Application Insights Java Agent"
     purl = "pkg:generic/azure-application-insights-java@3.5.0"
     sha256 = "20d1d5adf469fd19e841f88a01c13966358d238c3cc824e1db4278f1ff2f5c0d"
-    source = "https://github.com/Microsoft/ApplicationInsights-Java/archive/refs/tags/v3.5.0.tar.gz"
-    source-sha256 = "99b221246003b9831206e005314803a7116bb2acd9ee8d5f8e51cd616ec73cbd"
+    source = "https://github.com/Microsoft/ApplicationInsights-Java/archive/refs/tags/3.5.0.tar.gz"
+    source-sha256 = "5f4204b88e1261ebaa494e8a5c5c3a96f7f181ea69b8cb061ccb74cb13c282c5"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/v3.5.0/applicationinsights-agent-3.5.0.jar"
+    uri = "https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.5.0/applicationinsights-agent-3.5.0.jar"
     version = "3.5.0"
 
     [[metadata.dependencies.licenses]]
