@@ -28,7 +28,7 @@ api = "0.7"
     uri = "https://github.com/paketo-buildpacks/azure-application-insights/blob/main/LICENSE"
 
 [metadata]
-  include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/helper", "bin/main", "buildpack.toml", "resources/AI-Agent.xml"]
+  include-files = ["LICENSE", "NOTICE", "README.md", "linux/amd64/bin/build", "linux/amd64/bin/detect", "linux/amd64/bin/main", "linux/amd64/bin/helper", "linux/arm64/bin/build", "linux/arm64/bin/detect", "linux/arm64/bin/main", "linux/arm64/bin/helper", "buildpack.toml", "resources/AI-Agent.xml"]
   pre-package = "scripts/build.sh"
 
   [[metadata.dependencies]]
@@ -71,3 +71,11 @@ api = "0.7"
 
 [[stacks]]
   id = "*"
+
+[[targets]]
+arch = "amd64"
+os = "linux"
+
+[[targets]]
+arch = "arm64"
+os = "linux"

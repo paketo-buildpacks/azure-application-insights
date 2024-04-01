@@ -6,6 +6,9 @@ codeowners:
 - path:  "*"
   owner: "@paketo-buildpacks/java-maintainers"
 
+helpers:
+  "bin/helper": "$GOMOD/cmd/helper"
+
 package:
   repositories:   ["docker.io/paketobuildpacks/azure-application-insights","gcr.io/paketo-buildpacks/azure-application-insights"]
   register:       true
