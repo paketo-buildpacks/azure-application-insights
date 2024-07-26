@@ -48,16 +48,16 @@ api = "0.7"
       uri = "https://github.com/Microsoft/ApplicationInsights-Java/blob/master/LICENSE.txt"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-nodejs:3.1.0:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:microsoft:azure-application-insights-nodejs:3.2.1:*:*:*:*:*:*:*"]
     id = "azure-application-insights-nodejs"
     name = "Azure Application Insights NodeJS Agent"
-    purl = "pkg:generic/azure-application-insights-nodejs@3.1.0"
-    sha256 = "87157619683cd9df61b426870787f84df185c5ab2bf8541d6afa16fa54fec9ff"
-    source = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-3.1.0.tgz"
-    source-sha256 = "87157619683cd9df61b426870787f84df185c5ab2bf8541d6afa16fa54fec9ff"
+    purl = "pkg:generic/azure-application-insights-nodejs@3.2.1"
+    sha256 = "dfbb9f8d3705f425075b441ec0ac44daed21a2d26c732296ea9bd23cfaca99fe"
+    source = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-3.2.1.tgz"
+    source-sha256 = "dfbb9f8d3705f425075b441ec0ac44daed21a2d26c732296ea9bd23cfaca99fe"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-3.1.0.tgz"
-    version = "3.1.0"
+    uri = "https://registry.npmjs.org/applicationinsights/-/applicationinsights-3.2.1.tgz"
+    version = "3.2.1"
 
     [[metadata.dependencies.licenses]]
       type = "MIT"
