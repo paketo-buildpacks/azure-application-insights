@@ -1,4 +1,8 @@
-# `gcr.io/paketo-buildpacks/azure-application-insights`
+# Paketo Buildpack for Azure Application Insights
+
+## Buildpack ID: `paketo-buildpacks/azure-application-insights`
+## Registry URLs: `docker.io/paketobuildpacks/azure-application-insights`
+
 The Paketo Buildpack for Azure Application Insights is a Cloud Native Buildpack that contributes the Application Insights Agent and configures it to connect to the service.
 
 ## Behavior
