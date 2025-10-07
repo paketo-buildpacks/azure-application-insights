@@ -59,20 +59,6 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 		result.BOM.Entries = append(result.BOM.Entries, be)
 	}
 
-	if _, ok, err := pr.Resolve("azure-application-insights-nodejs"); err != nil {
-		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve azure-application-insights-nodejs plan entry\n%w", err)
-	} else if ok {
-		dep, err := dr.Resolve("azure-application-insights-nodejs", "")
-		if err != nil {
-			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
-		}
-
-		na, be := NewNodeJSAgent(context.Application.Path, dep, dc)
-		na.Logger = b.Logger
-		result.Layers = append(result.Layers, na)
-		result.BOM.Entries = append(result.BOM.Entries, be)
-	}
-
 	h, be := libpak.NewHelperLayer(context.Buildpack, "properties")
 	h.Logger = b.Logger
 	result.Layers = append(result.Layers, h)
