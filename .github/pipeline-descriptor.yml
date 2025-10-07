@@ -28,8 +28,3 @@ dependencies:
     pre_release: false
     repository:  ApplicationInsights-Java
     token:       ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
-- id:   azure-application-insights-nodejs
-  uses: docker://ghcr.io/paketo-buildpacks/actions/npm-dependency:main
-  with:
-    package:     applicationinsights
-    pre_release: false

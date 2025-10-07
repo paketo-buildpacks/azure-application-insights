@@ -20,11 +20,11 @@ import (
 	"fmt"
 
 	"github.com/buildpacks/libcnb"
-	"github.com/paketo-buildpacks/libpak/bindings"
 	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/libpak/bindings"
 )
 
-type Detect struct{
+type Detect struct {
 	Logger bard.Logger
 }
 
@@ -46,16 +46,6 @@ func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error
 				Requires: []libcnb.BuildPlanRequire{
 					{Name: "azure-application-insights-java"},
 					{Name: "jvm-application"},
-				},
-			},
-			{
-				Provides: []libcnb.BuildPlanProvide{
-					{Name: "azure-application-insights-nodejs"},
-				},
-				Requires: []libcnb.BuildPlanRequire{
-					{Name: "azure-application-insights-nodejs"},
-					{Name: "node", Metadata: map[string]interface{}{"build": true}},
-					{Name: "node_modules"},
 				},
 			},
 		},

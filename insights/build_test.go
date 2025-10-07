@@ -34,6 +34,10 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		ctx libcnb.BuildContext
 	)
 
+	it.Before(func() {
+		t.Setenv("BP_ARCH", "amd64")
+	})
+
 	it("contributes Java agent for API <=0.6", func() {
 		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: "azure-application-insights-java"})
 		ctx.Buildpack.Metadata = map[string]interface{}{
@@ -87,61 +91,6 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 
 		Expect(result.BOM.Entries).To(HaveLen(2))
 		Expect(result.BOM.Entries[0].Name).To(Equal("azure-application-insights-java"))
-		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
-	})
-
-	it("contributes NodeJS agent for API <=0.6", func() {
-		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: "azure-application-insights-nodejs"})
-		ctx.Buildpack.Metadata = map[string]interface{}{
-			"dependencies": []map[string]interface{}{
-				{
-					"id":      "azure-application-insights-nodejs",
-					"version": "1.1.1",
-					"stacks":  []interface{}{"test-stack-id"},
-				},
-			},
-		}
-		ctx.StackID = "test-stack-id"
-		ctx.Buildpack.API = "0.6"
-
-		result, err := insights.Build{}.Build(ctx)
-		Expect(err).NotTo(HaveOccurred())
-
-		Expect(result.Layers).To(HaveLen(2))
-		Expect(result.Layers[0].Name()).To(Equal("azure-application-insights-nodejs"))
-		Expect(result.Layers[1].Name()).To(Equal("helper"))
-		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
-
-		Expect(result.BOM.Entries).To(HaveLen(2))
-		Expect(result.BOM.Entries[0].Name).To(Equal("azure-application-insights-nodejs"))
-		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
-	})
-	it("contributes NodeJS agent for API 0.7+", func() {
-		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: "azure-application-insights-nodejs"})
-		ctx.Buildpack.Metadata = map[string]interface{}{
-			"dependencies": []map[string]interface{}{
-				{
-					"id":      "azure-application-insights-nodejs",
-					"version": "1.1.1",
-					"stacks":  []interface{}{"test-stack-id"},
-					"cpes":    []string{"cpe:2.3:a:microsoft:azure-application-insights-nodejs:3.2.3:*:*:*:*:*:*:*"},
-					"purl":    "pkg:generic/azure-application-insights-nodejs@3.2.3",
-				},
-			},
-		}
-		ctx.StackID = "test-stack-id"
-		ctx.Buildpack.API = "0.7"
-
-		result, err := insights.Build{}.Build(ctx)
-		Expect(err).NotTo(HaveOccurred())
-
-		Expect(result.Layers).To(HaveLen(2))
-		Expect(result.Layers[0].Name()).To(Equal("azure-application-insights-nodejs"))
-		Expect(result.Layers[1].Name()).To(Equal("helper"))
-		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
-
-		Expect(result.BOM.Entries).To(HaveLen(2))
-		Expect(result.BOM.Entries[0].Name).To(Equal("azure-application-insights-nodejs"))
 		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
 	})
 }
