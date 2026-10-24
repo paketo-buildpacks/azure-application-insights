@@ -17,8 +17,7 @@
 package insights_test
 
 import (
-	"fmt"
-	"io/ioutil"
+	"fmt" //nolint:staticcheck // hold off on the BOM migration for now
 	"os"
 	"path/filepath"
 	"testing"
@@ -41,10 +40,10 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 	it.Before(func() {
 		var err error
 
-		ctx.Buildpack.Path, err = ioutil.TempDir("", "java-agent-buildpack")
+		ctx.Buildpack.Path, err = os.MkdirTemp("", "java-agent-buildpack")
 		Expect(err).NotTo(HaveOccurred())
 
-		ctx.Layers.Path, err = ioutil.TempDir("", "java-agent-layers")
+		ctx.Layers.Path, err = os.MkdirTemp("", "java-agent-layers")
 		Expect(err).NotTo(HaveOccurred())
 	})
 
@@ -55,7 +54,7 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 
 	it("contributes Java agent", func() {
 		Expect(os.MkdirAll(filepath.Join(ctx.Buildpack.Path, "resources"), 0755)).To(Succeed())
-		Expect(ioutil.WriteFile(filepath.Join(ctx.Buildpack.Path, "resources", "AI-Agent.xml"), []byte{}, 0644)).
+		Expect(os.WriteFile(filepath.Join(ctx.Buildpack.Path, "resources", "AI-Agent.xml"), []byte{}, 0644)).
 			To(Succeed())
 
 		dep := libpak.BuildpackDependency{

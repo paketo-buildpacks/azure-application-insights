@@ -33,8 +33,8 @@ type JavaAgent struct {
 	Logger           bard.Logger
 }
 
-func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache) (JavaAgent, libcnb.BOMEntry) {
-	contributor, entry := libpak.NewDependencyLayer(dependency, cache, libcnb.LayerTypes{
+func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache) (JavaAgent, libcnb.BOMEntry) { //nolint:staticcheck // hold off on the BOM migration for now
+	contributor, entry := libpak.NewDependencyLayer(dependency, cache, libcnb.LayerTypes{ //nolint:staticcheck // hold off on the BOM migration for now
 		Launch: true,
 	})
 	return JavaAgent{
@@ -60,7 +60,7 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 		if err != nil {
 			return libcnb.Layer{}, fmt.Errorf("unable to open %s\n%w", file, err)
 		}
-		defer in.Close()
+		defer func() { _ = in.Close() }()
 
 		file = filepath.Join(layer.Path, "AI-Agent.xml")
 		if err := sherpa.CopyFile(in, file); err != nil {
